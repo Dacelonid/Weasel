@@ -19,6 +19,10 @@ public class Weasel {
 
     private void start() {
         checkAllCharactersAreValid(phrase);
+        findMatchingPhrase();
+    }
+
+    private void findMatchingPhrase() {
         int iteration = 0;
         String nextSuggestion = "";
         do {
@@ -32,7 +36,7 @@ public class Weasel {
         String suggestion = "";
         int score = 0;
         for (int x = 0; x < 100; x++) {
-            final String nextResult = getRandomString(lastSuggestion, phrase);
+            final String nextResult = getRandomString(lastSuggestion);
             final int size = getScore(nextResult).size();
             if (size > score) {
                 score = size;
@@ -43,11 +47,11 @@ public class Weasel {
         return suggestion;
     }
 
-    public String getRandomString(final String lastSuggestion, final String wantedPhrase) {
+    private String getRandomString(final String lastSuggestion) {
         final Set<Integer> correctLetters = getScore(lastSuggestion);
         String suggestion = "";
         final Random random = new Random();
-        for (int x = 0; x < wantedPhrase.length(); x++) {
+        for (int x = 0; x < phrase.length(); x++) {
             if (!correctLetters.contains(x)) {
                 suggestion += alphabet[random.nextInt(alphabet.length)];
             } else {
@@ -57,7 +61,7 @@ public class Weasel {
         return suggestion;
     }
 
-    public Set<Integer> getScore(final String suggestion) {
+    private Set<Integer> getScore(final String suggestion) {
         final Set<Integer> correctLetters = new HashSet<Integer>();
         if (suggestion.equals("")) {
             return correctLetters;
