@@ -41,7 +41,7 @@ public class Weasel {
                 suggestion = nextResult;
             }
         }
-        System.out.printf("%s%n%s%nScore\t%d%n", WEASEL, suggestion, score);
+        System.out.printf("Wanted Phrase:\t%s%nSuggestion:\t%s%nScore\t%d%n", WEASEL, suggestion, score);
         return suggestion;
     }
 
